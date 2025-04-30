@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+</head>
+<body>
+    <h2>Add Employee</h2>
+    <form action="AddEmployeeServlet" method="POST">
+        <label for="emp_name">Employee Name:</label><br>
+        <input type="text" id="emp_name" name="emp_name" required><br><br>
+
+        <label for="emp_mob">Employee Mobile:</label><br>
+        <input type="text" id="emp_mob" name="emp_mob" required><br><br>
+
+        <label for="emp_gender">Gender:</label><br>
+        <select id="emp_gender" name="emp_gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
+        </select><br><br>
+
+        <label for="emp_address">Address:</label><br>
+        <input type="text" id="emp_address" name="emp_address" required><br><br>
+
+        <label for="emp_dob">Date of Birth:</label><br>
+        <input type="date" id="emp_dob" name="emp_dob" required><br><br>
+
+        <label for="emp_salary">Salary:</label><br>
+        <input type="number" id="emp_salary" name="emp_salary" required><br><br>
+
+        <button type="submit">Add Employee</button>
+    </form>
+
+
+
+    <script>
+function addEmployee() {
+    const empName = document.getElementById("emp_name").value;
+    const empMob = document.getElementById("emp_mob").value;
+    const empAddress = document.getElementById("emp_address").value;
+    const empGender = document.getElementById("emp_gender").value;
+    const empDob = document.getElementById("emp_dob").value;
+    const empSalary = document.getElementById("emp_salary").value;
+
+    fetch('/add-employee', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            emp_name: empName,
+            emp_mob: empMob,
+            emp_address: empAddress,
+            emp_gender: empGender,
+            emp_dob: empDob,
+            emp_salary: empSalary
+        })
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert("Employee Added Successfully: " + data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+</script>
+
+</body>
+</html>
