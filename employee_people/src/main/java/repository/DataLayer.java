@@ -8,10 +8,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import model.Employee;
-import view.AddEmployeeView;
-import view.ReadEmployeeView;
-import view.ListAllEmployeeView;
-import view.DeleteEmployeeView;
 import utility.EssentialUtil;
 
 
@@ -65,7 +61,7 @@ public class DataLayer{
 			Employee employee=managerObject.find(Employee.class,empId);
 			return employee;
 		}catch(Exception e) {
-			ReadEmployeeView.errorDetails();
+			EssentialUtil.printIt("There is an exception while checking your data.. Please fix the issue!");
 			EssentialUtil.printIt("Exception is "+e);
 			return null;
 		}finally {
@@ -79,7 +75,7 @@ public class DataLayer{
 			List<Employee> employees = managerObject.createQuery("FROM Employee", Employee.class).getResultList();
 			return employees;
 		}catch(Exception e) {
-			ListAllEmployeeView.errorInListingEmployees();
+			EssentialUtil.printIt("Exception in DB connections.. Fix the issue! ");
 			EssentialUtil.printIt("Exception is "+e);
 			return null;
 		}finally {
